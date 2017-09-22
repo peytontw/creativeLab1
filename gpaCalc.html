@@ -5,6 +5,7 @@
 </head>
 
 <body>
+  <div id="fullwindow">
 <div id="header">
 	<h1> GPA Calculator</h1>
 </div>
@@ -12,7 +13,7 @@
 <div id="content">
 
 <div id="current">
-	How many courses would you like to add?
+  <p>How many courses would you like to add?</p>
 <form align="center" >
         <input type="number" name="users" id="numbCourses"><br>
         <input type="submit" id="generateCalc" value="Submit" onClick="addMoreRows(); return false;">
@@ -31,14 +32,16 @@
 
 <div>
 <button onclick="getGPA()">Get GPA!</button>
-<p id="finalGPA"> GPA = 0.0</p>
 </div>
+<p>GPA: </p> <p id="finalGPA">0.0</p>
 
 </div>
 
 <div id="footer">
 Copyright 2017
 </div>
+</div>
+
 <script>
  function addMoreRows() {
 
@@ -65,16 +68,12 @@ function getGPA()
 	var totalCreds, credsId, totalGrades, gradesId, gpaValue;
 	var numRows = document.getElementById("GPATable").getElementsByTagName("tr").length;
   numRows --;     //Because we are ignoring the row with the column titles
-  console.log("numRows =");
-  console.log(numRows);
 
   totalCreds = 0;
   for(i = 0; i < numRows; i++)
   {
   	credsId = "credits" + i;
   	totalCreds = Number(totalCreds) + Number(document.getElementById(credsId).value);
-    console.log("totalCreds =");
-    console.log(totalCreds);
   }
 
   totalGrades = 0;
@@ -167,7 +166,7 @@ function getGPA()
 
   gpaValue = Number(totalGrades) / Number(totalCreds);
   var gpaString = gpaValue.toString();
-  document.getElementById(finalGPA).innerHTML = "GPA = " + gpaString + "!";
+  document.getElementById("finalGPA").innerHTML = gpaValue.toFixed(2);
 }
 
 </script>
