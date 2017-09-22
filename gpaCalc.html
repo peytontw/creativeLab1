@@ -1,0 +1,175 @@
+<html>
+<head>
+	<title>GPA Calculator</title>
+  <link rel="stylesheet" href="main.css">
+</head>
+
+<body>
+<div id="header">
+	<h1> GPA Calculator</h1>
+</div>
+
+<div id="content">
+
+<div id="current">
+	How many courses would you like to add?
+<form align="center" >
+        <input type="number" name="users" id="numbCourses"><br>
+        <input type="submit" id="generateCalc" value="Submit" onClick="addMoreRows(); return false;">
+    </form>
+<table id="GPATable" style="text-align:center" align="center" >
+        <thead>
+            <tr>
+                <th>Course Name</th>
+                <th>Credits</th>
+                <th>Grade</th>
+            </tr>
+        </thead>
+    </table>
+
+</div>
+
+<div>
+<button onclick="getGPA()">Get GPA!</button>
+<p id="finalGPA"> GPA = 0.0</p>
+</div>
+
+</div>
+
+<div id="footer">
+Copyright 2017
+</div>
+<script>
+ function addMoreRows() {
+
+        var rowsAdded = document.getElementById('numbCourses').value;
+
+        for(var x=0; x < rowsAdded; x++) {
+          var newRow = document.getElementById('GPATable').insertRow();
+
+          var newCell = newRow.insertCell();
+          newCell.innerHTML="<tr><td><input id='courseName" + x + "' type='text'></td></tr>";
+
+          newCell = newRow.insertCell();
+          newCell.innerHTML="<tr><td><input id='credits" + x + "' type='number' value=0></td></tr>";
+
+          newCell = newRow.insertCell();
+          newCell.innerHTML="<tr><td><input id='grade" + x + "' type='text' value='A'></td></tr>";
+
+        }
+
+      }
+
+function getGPA()
+{
+	var totalCreds, credsId, totalGrades, gradesId, gpaValue;
+	var numRows = document.getElementById("GPATable").getElementsByTagName("tr").length;
+  numRows --;     //Because we are ignoring the row with the column titles
+  console.log("numRows =");
+  console.log(numRows);
+
+  totalCreds = 0;
+  for(i = 0; i < numRows; i++)
+  {
+  	credsId = "credits" + i;
+  	totalCreds = Number(totalCreds) + Number(document.getElementById(credsId).value);
+    console.log("totalCreds =");
+    console.log(totalCreds);
+  }
+
+  totalGrades = 0;
+  for(i = 0; i < numRows; i++)
+  {
+    gradesId = "grade" + i;
+    credsId = "credits" + i;
+    var currGrade = document.getElementById(gradesId).value;
+
+    switch (currGrade) {
+    case "A":
+        currGrade = 4;
+        break;
+    case "A-":
+        currGrade = 3.7;
+        break;
+    case "B+":
+        currGrade = 3.4;
+        break;
+    case "B":
+        currGrade = 3;
+        break;
+    case "B-":
+        currGrade = 2.7;
+        break;
+    case "C+":
+        currGrade = 2.4;
+        break;
+    case "C":
+        currGrade = 2;
+        break;
+    case "C-":
+        currGrade = 1.7;
+        break;
+    case "D+":
+        currGrade = 1.4;
+        break;
+    case "D":
+        currGrade = 1;
+        break;
+    case "D-":
+        currGrade = 0.7;
+        break;
+    case "F":
+        currGrade = 0;
+        break;
+    case "a":
+        currGrade = 4;
+        break;
+    case "a-":
+        currGrade = 3.7;
+        break;
+    case "b+":
+        currGrade = 3.4;
+        break;
+    case "b":
+        currGrade = 3;
+        break;
+    case "b-":
+        currGrade = 2.7;
+        break;
+    case "c+":
+        currGrade = 2.4;
+        break;
+    case "c":
+        currGrade = 2;
+        break;
+    case "c-":
+        currGrade = 1.7;
+        break;
+    case "d+":
+        currGrade = 1.4;
+        break;
+    case "d":
+        currGrade = 1;
+        break;
+    case "d-":
+        currGrade = 0.7;
+        break;
+    case "f":
+        currGrade = 0;
+        break;
+}
+
+    var temp = Number(document.getElementById(credsId).value) * Number(currGrade);
+
+    totalGrades = Number(totalGrades) + Number(temp);
+
+  }
+
+  gpaValue = Number(totalGrades) / Number(totalCreds);
+  var gpaString = gpaValue.toString();
+  document.getElementById(finalGPA).innerHTML = "GPA = " + gpaString + "!";
+}
+
+</script>
+	</body>
+</html>

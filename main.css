@@ -1,0 +1,14 @@
+#header, #footer {
+	background-color: black;
+	color: white;
+}
+
+div {
+  text-align: center;
+	padding: 15px;
+}
+
+#content {
+	background-image: url('blue1.jpg');
+	background-size: 100% 100%;
+}
